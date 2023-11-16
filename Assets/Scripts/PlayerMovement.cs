@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
-    public float movementSpeed = 5f;
     public float jumpForce = 5f;
+    public float gravity = 5f;
 
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask ground;
@@ -22,32 +22,20 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        rb.velocity = new Vector3(horizontalInput * movementSpeed, rb.velocity.y, verticalInput * movementSpeed);
-
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             Jump();
         }
+        if(!IsGrounded())
+        {
+            rb.velocity = new Vector3(rb.velocity.x, gravity, rb.velocity.z);
+         }
     }
 
     void Jump()
     {
         rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
         jumpSound.Play();
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-        if(collision.gameObject.CompareTag("Enemy Head"))
-        {
-            Destroy(collision.transform.parent.gameObject);
-            Jump();
-            
-        }
     }
 
     bool IsGrounded()
