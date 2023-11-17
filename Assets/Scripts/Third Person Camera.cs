@@ -4,29 +4,32 @@ using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public CharacterController controller;
-    public float speed = 6f;
-    public float turnSmoothTime = 0.1f;
-    float turnSmoothVelocity;
-    public Transform cam;
+    [Header("Referance")]
+    public Transform orientation;
+    public Transform player;
+    public Transform playerObject;
+    public Rigidbody rb;
+
+    public float rotaionSpeed;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
-    void Update()
-    {
-        float horizantal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        Vector3 direction = new Vector3(horizantal, 0f, vertical).normalized;
 
-        if(direction.magnitude >= 0.1f)
+    private void Update()
+    {
+        Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
+        orientation.forward = viewDir.normalized;
+
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+        if(inputDir != Vector3.zero)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            playerObject.forward = Vector3.Slerp(playerObject.forward, inputDir.normalized, Time.deltaTime * rotaionSpeed);
         }
     }
 }
