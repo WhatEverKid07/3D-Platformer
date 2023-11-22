@@ -5,20 +5,24 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool isWalking = false;
+    [SerializeField] AudioSource WalkingSound;
+    [SerializeField] AudioSource JumpSound;
+
     [Header("Movement")]
     public float moveSpeed;
 
     public float groundDrag;
-
+    
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
-
+   
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode runKey = KeyCode.LeftShift;
-
+    
     [Header("Ground Check")]
     public float playerHight;
     public LayerMask whatIsGround;
@@ -52,6 +56,21 @@ public class PlayerMovement : MonoBehaviour
         }
         else
             rb.drag = 0;
+
+        if (isWalking == true)
+        {
+            WalkingSound.Play();
+        }
+
+        if (Input.GetButton("Horizontal"))
+        {
+            isWalking = true;
+        }
+
+        if (Input.GetButton("Vertical"))
+        {
+            isWalking = true;
+        }
     }
 
    
@@ -74,11 +93,13 @@ public class PlayerMovement : MonoBehaviour
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
+
+            JumpSound.Play();
         }
 
         if (Input.GetKey(runKey))
         {
-            moveSpeed = 10f; 
+            moveSpeed = 10f;
         }
         else
         {

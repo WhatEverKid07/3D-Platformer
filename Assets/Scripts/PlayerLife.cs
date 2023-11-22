@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerLife : MonoBehaviour
 {
     [SerializeField] AudioSource deathSound;
-    bool dead = false;
+    //bool dead = false;
     
    // private void Update()
     //{
@@ -20,13 +20,13 @@ public class PlayerLife : MonoBehaviour
         if(collision.gameObject.CompareTag("Enemy Body"))
         {
             Debug.Log("Dead");
-            //Die();
+            Die();
         }
     }
     void Die()
     {
-        Invoke(nameof(ReloadLevel), 1.3f);
-        dead = true;
+        Invoke(nameof(ReloadLevel),1.5f);
+        //dead = true;
         deathSound.Play();
     }
 
