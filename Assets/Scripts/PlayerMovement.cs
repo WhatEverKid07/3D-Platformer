@@ -35,10 +35,13 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 moveDirection;
 
+    Animator myAnim;
+
     Rigidbody rb;
 
     private void Start()
     {
+        myAnim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
@@ -46,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHight * 0.5f + 0.2f, whatIsGround);
 
         MyInput();
@@ -61,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
         {
             WalkingSound.Play();
         }
+
+        
 
         if (Input.GetButton("Horizontal"))
         {
@@ -83,6 +89,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
+        myAnim.SetFloat("speed", 1);
+        isWalking = true;
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -110,6 +118,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        isWalking = true;
+
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         if(grounded)
