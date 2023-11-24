@@ -57,9 +57,14 @@ public class PlayerMovement : MonoBehaviour
         if (grounded)
         {
             rb.drag = groundDrag;
+            myAnim.SetBool("isOnGround", true);
         }
         else
+        {
             rb.drag = 0;
+            myAnim.SetBool("isOnGround", false);
+        }
+            
 
         if (isWalking == true)
         {
@@ -67,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         
+
 
         if (Input.GetButton("Horizontal"))
         {
@@ -89,7 +95,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
-        myAnim.SetFloat("speed", 1);
         isWalking = true;
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
@@ -119,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
         isWalking = true;
+        myAnim.SetBool("isWalking", true);
 
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
