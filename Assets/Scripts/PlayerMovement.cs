@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public bool isWalking = false;
+    bool isWalking = false;
+    bool isRunning = false;
     [SerializeField] AudioSource WalkingSound;
     [SerializeField] AudioSource JumpSound;
 
@@ -35,13 +36,13 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 moveDirection;
 
-    Animator myAnim;
+    public Animator myAnim;
 
     Rigidbody rb;
 
     private void Start()
     {
-        myAnim = GetComponent<Animator>();
+        //myAnim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
@@ -54,34 +55,46 @@ public class PlayerMovement : MonoBehaviour
 
         MyInput();
 
+        Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+        if (targetVelocity.x != 0 || targetVelocity.z != 0 && grounded)
+        {
+            isWalking = true;
+        }
+        else
+        {
+            isWalking = false;
+        }
+
         if (grounded)
         {
             rb.drag = groundDrag;
-            myAnim.SetBool("isOnGround", true);
+           // myAnim.SetBool("isOnGround", true);
         }
         else
         {
             rb.drag = 0;
-            myAnim.SetBool("isOnGround", false);
+           // myAnim.SetBool("isOnGround", false);
         }
-            
 
-        if (isWalking == true)
+        if (Input.GetButton("Horizontal") && isWalking == true)
         {
+            isWalking = true;
+            myAnim.SetBool("isWalking", true);
+            WalkingSound.Play();
+        }
+        
+
+        if (Input.GetButton("Vertical") && isWalking == true)
+        {
+            isWalking = true;
+            myAnim.SetBool("isWalking",true);
             WalkingSound.Play();
         }
 
-        
-
-
-        if (Input.GetButton("Horizontal"))
+        if (isWalking == false)
         {
-            isWalking = true;
-        }
-
-        if (Input.GetButton("Vertical"))
-        {
-            isWalking = true;
+            myAnim.SetBool("isWalking",false);
         }
     }
 
@@ -95,13 +108,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
-        isWalking = true;
+        Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
         if(Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
+
+            myAnim.SetBool("Jumped",true);
+            myAnim.SetBool("isOnGround", false);
 
             Jump();
 
@@ -113,26 +130,39 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(runKey))
         {
             moveSpeed = 10f;
+            myAnim.SetBool("isRunning", true);
         }
         else
         {
             moveSpeed = 4f;
+            isRunning = false;
+        }
+
+        if (isRunning == true)
+        {
+            myAnim.SetBool("isRunning", true);
+        }
+        else
+        {
+            myAnim.SetBool("isRunning", false);
         }
 
     }
 
     private void MovePlayer()
     {
-        isWalking = true;
-        myAnim.SetBool("isWalking", true);
-
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        if(grounded)
+        if (grounded)
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            myAnim.SetBool("Jumped", false);
+            myAnim.SetBool("isOnGround", true);
+        }
+            
 
         else if(!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);     
     }
 
     private void SpeedControl()

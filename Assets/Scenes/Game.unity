@@ -5515,6 +5515,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   orientation: {fileID: 1897046456}
+  myAnim: {fileID: 1250257112}
 --- !u!136 &222792098
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5860,7 +5861,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222792094}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b2b5d4ab84794664b8b2880d2f4c332c, type: 2}
   m_CullingMode: 0
@@ -22864,7 +22865,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997882931}
-  m_LocalRotation: {x: 0.1385529, y: -0.04578791, z: 0.006412824, w: 0.9892752}
+  m_LocalRotation: {x: 0.13855289, y: -0.04578791, z: 0.006412824, w: 0.9892752}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
