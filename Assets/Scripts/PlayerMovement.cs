@@ -131,20 +131,25 @@ public class PlayerMovement : MonoBehaviour
         {
             moveSpeed = 10f;
             myAnim.SetBool("isRunning", true);
+            myAnim.SetBool("isWalking", false);
+            Debug.Log("running");
         }
         else
         {
             moveSpeed = 4f;
             isRunning = false;
+            Debug.Log("walking");
         }
 
         if (isRunning == true)
         {
             myAnim.SetBool("isRunning", true);
+            myAnim.SetBool("isWalking", false);
         }
         else
         {
             myAnim.SetBool("isRunning", false);
+            myAnim.SetBool("isWalking", true);
         }
 
     }
