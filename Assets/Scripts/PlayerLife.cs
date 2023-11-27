@@ -23,6 +23,17 @@ public class PlayerLife : MonoBehaviour
             Die();
         }
     }
+
+    private void OnCollision(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy Head"))
+        {
+            Debug.Log("Killed");
+            GameObject.FindGameObjectsWithTag("Enemy");
+            
+        }
+    }
+
     void Die()
     {
         Invoke(nameof(ReloadLevel),1.5f);
