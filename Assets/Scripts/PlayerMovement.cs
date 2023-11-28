@@ -150,13 +150,19 @@ public class PlayerMovement : MonoBehaviour
             myAnim.SetBool("isWalking", true);
         }
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            Stab();
+            Debug.Log("Left Mouse");
+        }
+
     }
 
     private void MovePlayer()
     {
         //checking if player is moving. VERY COOL
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
+        
         if (grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
@@ -189,5 +195,10 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    private void Stab()
+    {
+        myAnim.SetTrigger("Stab");
     }
 }   
