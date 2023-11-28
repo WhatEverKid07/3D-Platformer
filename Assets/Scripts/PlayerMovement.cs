@@ -60,10 +60,12 @@ public class PlayerMovement : MonoBehaviour
         if (targetVelocity.x != 0 || targetVelocity.z != 0 && grounded)
         {
             isWalking = true;
+            WalkingSound.Play();
         }
         else
         {
             isWalking = false;
+            WalkingSound.Stop();
         }
 
         if (grounded)
@@ -77,20 +79,27 @@ public class PlayerMovement : MonoBehaviour
            // myAnim.SetBool("isOnGround", false);
         }
 
-        if (Input.GetButton("Horizontal") && isWalking == true)
+        if (isWalking == false)
         {
-            isWalking = true;
-            myAnim.SetBool("isWalking", true);
-            WalkingSound.Play();
+            //WalkingSound.Play();
+            Debug.Log("isWalking");
+        }
+        else if (isWalking == true)
+        {
+           // WalkingSound.Stop();
         }
         
 
-        if (Input.GetButton("Vertical") && isWalking == true)
+        if (isWalking == false)
         {
-            isWalking = true;
-            myAnim.SetBool("isWalking",true);
-            WalkingSound.Play();
+           // WalkingSound.Play();
+            Debug.Log("isWalking");
         }
+        else if (isWalking == true)
+        {
+            //WalkingSound.Stop();
+        }
+
 
         if (isWalking == false)
         {

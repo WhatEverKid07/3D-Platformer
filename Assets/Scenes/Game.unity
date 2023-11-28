@@ -5689,6 +5689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathSound: {fileID: 222792099}
+  myAnim: {fileID: 222792104}
 --- !u!82 &222792102
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6787,7 +6788,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255422571}
-  m_LocalRotation: {x: 0.11546873, y: -0.04592485, z: 0.0053443857, w: 0.9922345}
+  m_LocalRotation: {x: 0.11546873, y: -0.045924917, z: 0.0053443937, w: 0.9922345}
   m_LocalPosition: {x: -0.057315826, y: 0.3015604, z: -10.293257}
   m_LocalScale: {x: 2.3697608, y: 2.3697612, z: 2.3697608}
   m_ConstrainProportionsScale: 0
@@ -23308,7 +23309,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997882931}
-  m_LocalRotation: {x: 0.13855289, y: -0.04578791, z: 0.006412824, w: 0.9892752}
+  m_LocalRotation: {x: 0.1385529, y: -0.04578791, z: 0.006412824, w: 0.9892752}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -33548,7 +33549,7 @@ GameObject:
   - component: {fileID: 1111427869}
   m_Layer: 0
   m_Name: PlayerObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51275,7 +51276,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1945636036}
-  m_LocalRotation: {x: 0.11546873, y: -0.045924865, z: 0.0053443885, w: 0.9922345}
+  m_LocalRotation: {x: 0.11546873, y: -0.0459249, z: 0.0053443923, w: 0.9922345}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -55750,6 +55751,10 @@ PrefabInstance:
     - target: {fileID: 5789321363355399794, guid: fa7a504adc5fb194184d5294b94d8493, type: 3}
       propertyPath: m_Name
       value: Coin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5789321363355399794, guid: fa7a504adc5fb194184d5294b94d8493, type: 3}
+      propertyPath: m_TagString
+      value: Enemy Body
       objectReference: {fileID: 0}
     - target: {fileID: 6966575003374448880, guid: fa7a504adc5fb194184d5294b94d8493, type: 3}
       propertyPath: m_RootOrder
