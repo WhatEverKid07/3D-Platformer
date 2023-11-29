@@ -39,7 +39,7 @@ public class PlayerLife : MonoBehaviour
 
     void Die()
     {
-        Invoke(nameof(ReloadLevel),1.5f);
+        Invoke(nameof(ReloadLevel),1f);
         deathSound.Play();
         myAnim.SetTrigger("Dead");
         Debug.Log("Dead");
@@ -47,6 +47,6 @@ public class PlayerLife : MonoBehaviour
 
     void ReloadLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("End Scene");
     }
 }
