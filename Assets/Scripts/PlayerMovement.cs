@@ -7,8 +7,10 @@ public class PlayerMovement : MonoBehaviour
 {
     bool isWalking = false;
     bool isRunning = false;
+    public bool isAbleToKill = false;
     [SerializeField] AudioSource WalkingSound;
     [SerializeField] AudioSource JumpSound;
+    [SerializeField] AudioSource StabSound;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -67,40 +69,7 @@ public class PlayerMovement : MonoBehaviour
             isWalking = false;
             WalkingSound.Stop();
         }
-
-        if (grounded)
-        {
-            rb.drag = groundDrag;
-           // myAnim.SetBool("isOnGround", true);
-        }
-        else
-        {
-            rb.drag = 0;
-           // myAnim.SetBool("isOnGround", false);
-        }
-
-        if (isWalking == false)
-        {
-            //WalkingSound.Play();
-            Debug.Log("isWalking");
-        }
-        else if (isWalking == true)
-        {
-           // WalkingSound.Stop();
-        }
         
-
-        if (isWalking == false)
-        {
-           // WalkingSound.Play();
-            Debug.Log("isWalking");
-        }
-        else if (isWalking == true)
-        {
-            //WalkingSound.Stop();
-        }
-
-
         if (isWalking == false)
         {
             myAnim.SetBool("isWalking",false);
@@ -162,14 +131,16 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Stab();
-            Debug.Log("Left Mouse");
+        }
+        else
+        {
+            isAbleToKill = false;
         }
 
     }
 
     private void MovePlayer()
     {
-        //checking if player is moving. VERY COOL
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         
         if (grounded)
@@ -209,5 +180,7 @@ public class PlayerMovement : MonoBehaviour
     private void Stab()
     {
         myAnim.SetTrigger("Stab");
+        StabSound.Play();
+        isAbleToKill = true;
     }
 }   

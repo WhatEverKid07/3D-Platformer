@@ -9,18 +9,18 @@ public class PlayerLife : MonoBehaviour
 
     public Animator myAnim;
 
-    //bool dead = false;
+    private void Update()
+    {
 
-    // private void Update()
-    //{
-    //  if(transform.position.y < -2f && !dead)
-    //  {
-    //     Die();
-    //} 
-    //}
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Enemy Body"))
+        {
+            Debug.Log("Dead");
+            Die();
+        }
+        if (collision.gameObject.CompareTag("Enemy Body"))
         {
             Debug.Log("Dead");
             Die();
@@ -40,7 +40,6 @@ public class PlayerLife : MonoBehaviour
     void Die()
     {
         Invoke(nameof(ReloadLevel),1.5f);
-        //dead = true;
         deathSound.Play();
         myAnim.SetTrigger("Dead");
         Debug.Log("Dead");
