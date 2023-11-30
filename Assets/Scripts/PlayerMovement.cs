@@ -86,8 +86,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
-        Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -107,13 +105,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(runKey))
         {
-            moveSpeed = 10f;
+            moveSpeed = 7f;
             myAnim.SetBool("isRunning", true);
             myAnim.SetBool("isWalking", false);
         }
         else
         {
-            moveSpeed = 4f;
+            moveSpeed = 3f;
             isRunning = false;
         }
 
