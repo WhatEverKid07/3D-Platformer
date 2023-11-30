@@ -28,7 +28,9 @@ public class EnemyMovement : MonoBehaviour
     public void moveEnemy()
     {
         float distanceToCurrent = Vector2.Distance(transform.position, currentWaypoint.position);
+
         Vector3 relativePos = currentWaypoint.position - transform.position;
+
         transform.rotation = Quaternion.LookRotation(relativePos);
         if (distanceToCurrent == 0)
         {

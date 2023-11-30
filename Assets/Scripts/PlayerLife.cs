@@ -8,35 +8,18 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] AudioSource deathSound;
 
     public Animator myAnim;
+ 
+    [SerializeField] PlayerMovement isAbleToKill;
 
-    private void Update()
-    {
-
-    }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Enemy Body"))
+        if (collision.gameObject.CompareTag("Enemy Body") && isAbleToKill.isAbleToKill == false)
         {
             Debug.Log("Dead");
-            Die();
-        }
-        if (collision.gameObject.CompareTag("Enemy Body"))
-        {
-            Debug.Log("Dead");
-            Die();
+            //Die();
         }
     }
-
-    private void OnCollision(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy Head"))
-        {
-            Debug.Log("Killed");
-            GameObject.FindGameObjectsWithTag("Enemy");
-            
-        }
-    }
-
+    
     void Die()
     {
         Invoke(nameof(ReloadLevel),1f);
@@ -47,6 +30,7 @@ public class PlayerLife : MonoBehaviour
 
     void ReloadLevel()
     {
-        SceneManager.LoadScene("End Scene");
+        SceneManager.LoadScene("Death Scene");
     }
+
 }

@@ -5,30 +5,31 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    bool isWalking = false;
-    bool isRunning = false;
+    bool isWalking;
+    bool isRunning;
     public bool isAbleToKill = false;
     [SerializeField] AudioSource WalkingSound;
     [SerializeField] AudioSource JumpSound;
     [SerializeField] AudioSource StabSound;
+    
 
     [Header("Movement")]
-    public float moveSpeed;
+    [SerializeField] float moveSpeed;
 
-    public float groundDrag;
-    
-    public float jumpForce;
-    public float jumpCooldown;
-    public float airMultiplier;
+    [SerializeField] float groundDrag;
+
+    [SerializeField] float jumpForce;
+    [SerializeField] float jumpCooldown;
+    [SerializeField] float airMultiplier;
     bool readyToJump;
    
     [Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode runKey = KeyCode.LeftShift;
+    [SerializeField] KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] KeyCode runKey = KeyCode.LeftShift;
     
     [Header("Ground Check")]
-    public float playerHight;
-    public LayerMask whatIsGround;
+    [SerializeField] float playerHight;
+    [SerializeField] LayerMask whatIsGround;
     bool grounded;
 
     public Transform orientation;
@@ -62,17 +63,16 @@ public class PlayerMovement : MonoBehaviour
         if (targetVelocity.x != 0 || targetVelocity.z != 0 && grounded)
         {
             isWalking = true;
-            WalkingSound.Play();
         }
         else
         {
-            isWalking = false;
-            WalkingSound.Stop();
+            isWalking = false;   
         }
         
         if (isWalking == false)
         {
             myAnim.SetBool("isWalking",false);
+            WalkingSound.Play();
         }
     }
 
@@ -180,5 +180,6 @@ public class PlayerMovement : MonoBehaviour
         myAnim.SetTrigger("Stab");
         StabSound.Play();
         isAbleToKill = true;
+        Debug.Log("is able to kill");
     }
 }   
