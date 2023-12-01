@@ -12,6 +12,8 @@ public class ItemCollector : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Coin"))
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             SceneManager.LoadScene("End Scene");
         }
     }

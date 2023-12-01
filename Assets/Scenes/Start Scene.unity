@@ -1518,7 +1518,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Western Robert
+  m_Text: Western Wibble
 --- !u!222 &1914848352
 CanvasRenderer:
   m_ObjectHideFlags: 0

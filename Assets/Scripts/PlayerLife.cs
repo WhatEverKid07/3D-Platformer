@@ -25,6 +25,8 @@ public class PlayerLife : MonoBehaviour
         Invoke(nameof(ReloadLevel),1f);
         deathSound.Play();
         myAnim.SetTrigger("Dead");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         //Debug.Log("Dead");
     }
 
