@@ -180,6 +180,6 @@ public class PlayerMovement : MonoBehaviour
         myAnim.SetTrigger("Stab");
         StabSound.Play();
         isAbleToKill = true;
-        Debug.Log("is able to kill");
+        //Debug.Log("is able to kill");
     }
 }   

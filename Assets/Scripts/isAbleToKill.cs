@@ -9,8 +9,7 @@ public class isAbleToKill : MonoBehaviour
     public Collider KillBox;
     public PlayerMovement Player;
     public int AppearTime;
-
-    // Update is called once per frame
+        
     void Update()
     {
         KillBox.enabled = (AppearTime > 0);
@@ -27,7 +26,7 @@ public class isAbleToKill : MonoBehaviour
     {
         if (other.gameObject.tag == ("Enemy Body"))
         {
-            Debug.Log("Killed");
+            //Debug.Log("Killed");
             other.gameObject.SetActive(false);
         }
     }

@@ -15,8 +15,8 @@ public class PlayerLife : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy Body") && isAbleToKill.isAbleToKill == false)
         {
-            Debug.Log("Dead");
-            //Die();
+            //Debug.Log("Dead");
+            Die();
         }
     }
     
@@ -25,7 +25,7 @@ public class PlayerLife : MonoBehaviour
         Invoke(nameof(ReloadLevel),1f);
         deathSound.Play();
         myAnim.SetTrigger("Dead");
-        Debug.Log("Dead");
+        //Debug.Log("Dead");
     }
 
     void ReloadLevel()
